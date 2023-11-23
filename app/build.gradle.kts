@@ -49,6 +49,9 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui:2.3.0")
 
     implementation ("com.github.bumptech.glide:glide:4.11.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
 
     implementation("androidx.appcompat:appcompat:1.6.1")

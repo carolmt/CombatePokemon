@@ -1,6 +1,5 @@
 package com.example.combatepokemon;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -54,12 +53,12 @@ public class DatosPokemon extends Fragment {
                     vistaHp2 = simuladorCombate.recibirAtaque(p1, p2);
                     binding.vistaHP2.setText("HP: " + String.valueOf(vistaHp2));
                     pokemon1 = false;
-                    }
-                  else {
+                }
+                else {
                     vistaHp1 = simuladorCombate.recibirAtaque(p2, p1);
                     binding.vistaHP1.setText("HP: " + String.valueOf(vistaHp1));
                     pokemon1 = true;
-                  }
+                }
             }
         });
     }

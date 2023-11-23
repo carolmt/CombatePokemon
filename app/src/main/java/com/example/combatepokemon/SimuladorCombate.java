@@ -10,6 +10,7 @@ public class SimuladorCombate {
         private int defensa;
         private int ataqueEspecial;
         private int defensaEspecial;
+        int danyoRecibido = 0;
 
         public Pokemon(String nombre, int ataque, int hp, int defensa, int ataqueEspecial, int defensaEspecial) {
             this.nombre = nombre;
@@ -18,6 +19,7 @@ public class SimuladorCombate {
             this.defensa = defensa;
             this.ataqueEspecial = ataqueEspecial;
             this.defensaEspecial = defensaEspecial;
+            danyoRecibido = 0;
         }
 
         public Pokemon(int ataque, int hp, int defensa, int ataqueEspecial, int defensaEspecial) {
@@ -26,6 +28,7 @@ public class SimuladorCombate {
             this.defensa = defensa;
             this.ataqueEspecial = ataqueEspecial;
             this.defensaEspecial = defensaEspecial;
+            danyoRecibido = 0;
         }
 
         public String getNombre() {
@@ -75,35 +78,35 @@ public class SimuladorCombate {
         public void setDefensaEspecial(int defensaEspecial) {
             this.defensaEspecial = defensaEspecial;
         }
+
+        public int getDanyoRecibido() {
+            return danyoRecibido;
+        }
+
+        public void setDanyoRecibido(int danyoRecibido) {
+            this.danyoRecibido = danyoRecibido;
+        }
+
+        public int generarAleatorio() {
+            Random rnd = new Random();
+            return rnd.nextInt(100);
+        }
     }
 
-    public int recibirAtaque(Pokemon p1, Pokemon p2) {
-        int danyoRecibido = 0;
-        int defensa ;
-        int aleatorio;
-        Random rnd = new Random();
-        aleatorio=rnd.nextInt(100);
+    public int recibirAtaque(Pokemon atacante, Pokemon defensor) {
 
-        try {
+        int aleatorio = atacante.generarAleatorio();
 
-            if (aleatorio % 5 == 0) {
-                danyoRecibido = p1.getAtaqueEspecial();
-                Thread.sleep(1000);
-                p2.setHp(p2.getHp()-danyoRecibido+p2.getDefensaEspecial());
-                defensa = p2.getHp();
-                return defensa;
-            }
-            else {
-                danyoRecibido = p1.getAtaque();
-                Thread.sleep(1000);   //hago que tarde 1 sec en hacer efecto el ataque.
-                p2.setHp(p2.getHp()-danyoRecibido+p2.getDefensa()); //aquí modifico los puntos de salud.
-                defensa = p2.getHp();
-                return defensa;
-            }
-        } catch (InterruptedException e) {
+        if (aleatorio % 5 == 0) { //saco un aleatorio del 0 a 100 y si es divisble entre 5 lanzará un ataque especial.
+            defensor.setDanyoRecibido(atacante.getAtaqueEspecial()); // al p2 le sumaremos al daño el taqeue especial del p1.
+            defensor.setHp(defensor.getHp()-defensor.getDanyoRecibido()+defensor.getDefensaEspecial()); // entonces modificamos la salud del p2 atacado restando el daño y sumando la defensa correspondiente
         }
-        defensa = p2.getHp();
-        return defensa;
+        else {
+            defensor.setDanyoRecibido(atacante.getAtaque()); // aqui hago lo mismo que arriba pero con ataque normal.
+            defensor.setHp(defensor.getHp()-defensor.getDanyoRecibido()+defensor.getDefensa());
+        }
+        return defensor.getHp(); // devolvemos la salud modificada.
+
     }
 
 }
