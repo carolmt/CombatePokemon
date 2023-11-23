@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/datosPokemonFragment">
+
+    <fragment
+        android:id="@+id/datosPokemonFragment"
+        android:name="com.example.combatepokemon.DatosPokemon"
+        android:label="fragment_datos_pokemon"
+        tools:layout="@layout/fragment_datos_pokemon" />
+</navigation>
