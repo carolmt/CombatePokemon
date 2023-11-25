@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/datosPokemon">
+    app:startDestination="@id/inicio">
 
 
     <fragment
@@ -11,4 +11,13 @@
         android:name="com.example.combatepokemon.DatosPokemon"
         android:label="fragment_datos_pokemon"
         tools:layout="@layout/fragment_datos_pokemon" />
+    <fragment
+        android:id="@+id/inicio"
+        android:name="com.example.combatepokemon.Inicio"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicio_to_datosPokemon"
+            app:destination="@id/datosPokemon" />
+    </fragment>
 </navigation>
