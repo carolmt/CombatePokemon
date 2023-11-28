@@ -1,5 +1,7 @@
 package com.example.combatepokemon;
 
+import android.util.Log;
+
 import java.util.Random;
 
 public class SimuladorCombate {
@@ -104,15 +106,17 @@ public class SimuladorCombate {
     public int recibirAtaque(Pokemon atacante, Pokemon defensor, Callback callback) {
 
         int aleatorio = atacante.generarAleatorio();
+        int danyo;
 
         if (aleatorio % 5 == 0) { //saco un aleatorio del 0 a 100 y si es divisble entre 5 lanzará un ataque especial.
-            defensor.setDanyoRecibido(atacante.getAtaqueEspecial()); // al p2 le sumaremos al daño el taqeue especial del p1.
-            defensor.setHp(defensor.getHp()-defensor.getDanyoRecibido()+defensor.getDefensaEspecial()); // entonces modificamos la salud del p2 atacado restando el daño y sumando la defensa correspondiente
+            danyo = atacante.getAtaqueEspecial();
         }
         else {
-            defensor.setDanyoRecibido(atacante.getAtaque()); // aqui hago lo mismo que arriba pero con ataque normal.
-            defensor.setHp(defensor.getHp()-defensor.getDanyoRecibido()+defensor.getDefensa());
+            danyo = atacante.getAtaque();
         }
+
+        defensor.setDanyoRecibido(danyo); // al p2 le sumaremos al daño el taqeue especial del p1.
+        defensor.setHp(defensor.getHp() - defensor.getDanyoRecibido() + (aleatorio % 5 == 0 ? defensor.getDefensaEspecial() : defensor.getDefensa()));
 
         callback.cuandoSeAtaca(defensor.getHp());
         return defensor.getHp(); // devolvemos la salud modificada.
