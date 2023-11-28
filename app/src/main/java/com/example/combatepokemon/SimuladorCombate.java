@@ -3,6 +3,10 @@ package com.example.combatepokemon;
 import java.util.Random;
 
 public class SimuladorCombate {
+
+    public SimuladorCombate() {
+
+    }
     public static class Pokemon {
         private String nombre;
         private int ataque;
@@ -93,7 +97,11 @@ public class SimuladorCombate {
         }
     }
 
-    public int recibirAtaque(Pokemon atacante, Pokemon defensor) {
+    interface Callback {
+        void cuandoSeAtaca(int salud);
+    }
+
+    public int recibirAtaque(Pokemon atacante, Pokemon defensor, Callback callback) {
 
         int aleatorio = atacante.generarAleatorio();
 
@@ -105,6 +113,8 @@ public class SimuladorCombate {
             defensor.setDanyoRecibido(atacante.getAtaque()); // aqui hago lo mismo que arriba pero con ataque normal.
             defensor.setHp(defensor.getHp()-defensor.getDanyoRecibido()+defensor.getDefensa());
         }
+
+        callback.cuandoSeAtaca(defensor.getHp());
         return defensor.getHp(); // devolvemos la salud modificada.
 
     }
